@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectLeoJacobovitz">
         <activity
+            android:name=".AiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListOfBooks"
+            android:exported="false" />
+        <activity
+            android:name=".Addbook"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
