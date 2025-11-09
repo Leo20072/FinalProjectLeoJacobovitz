@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "974978946623",
+    "project_id": "finalprojectleojacobovitz",
+    "storage_bucket": "finalprojectleojacobovitz.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974978946623:android:e26c1ebedd4651e82eca8a",
+        "android_client_info": {
+          "package_name": "com.example.finalprojectleojacobovitz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAATYzQuliNgKq6lSJ_Kre14BzOvRStjTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
