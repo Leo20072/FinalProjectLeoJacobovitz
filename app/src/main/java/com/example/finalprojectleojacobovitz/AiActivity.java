@@ -14,8 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.login_and_signup_new.gemini.GeminiCallback;
-import com.example.login_and_signup_new.gemini.GeminiManager;
+import com.example.finalprojectleojacobovitz.gemini.GeminiCallback;
+import com.example.finalprojectleojacobovitz.gemini.GeminiManager;
 
 public class AiActivity extends AppCompatActivity {
 
