@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CustomDialogEdit">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="50dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/custom_edittext"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Title of the screen -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="עריכת נתוני הספר"
+                android:textAlignment="center"
+                android:textColor="@color/lavender"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+
+            <!-- Book Cover Image Upload Placeholder -->
+
+            <!-- 1. Book Name Input -->
+            <!--            <ImageView-->
+            <!--                android:id="@+id/uploadImage"-->
+            <!--                android:layout_width="200dp"-->
+            <!--                android:layout_height="100dp"-->
+            <!--                android:layout_gravity="center_horizontal"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:contentDescription="תמונת כריכת הספר"-->
+            <!--                android:scaleType="fitCenter"-->
+            <!--                android:src="@drawable/uploadimg" />-->
+
+            <EditText
+                android:id="@+id/currentPagesCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_edittext"
+                android:gravity="start|center_vertical"
+                android:hint="עמוד הנוכחי"
+                android:inputType="textUri"
+                android:padding="16dp"
+                android:textColor="@color/lavender"
+                android:textDirection="rtl" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"></com.google.android.material.divider.MaterialDivider>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="דיווח עמודים קרואים לחץ על הכפתורים במקום להקליד ( זהו עדכן וצא )"
+                android:textColor="@color/lavender"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    android:text="להוסיף עמוד 1 שקראת"
+                    android:textSize="19dp"
+                    android:backgroundTint="@color/lavender"
+                    android:id="@+id/btnAdd1CurrentPagesCount"></Button>
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    android:text="להוסיף עמוד 10 שקראת"
+                    android:textSize="19dp"
+                    android:id="@+id/btnAdd10CurrentPagesCount"
+                    android:backgroundTint="@color/lavender"
+                    android:layout_marginLeft="12dp"></Button>
+            </LinearLayout>
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"></com.google.android.material.divider.MaterialDivider>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="שינוי שם הספר:"
+                android:textColor="@color/lavender"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="3dp"/>
+
+            <EditText
+                android:id="@+id/changeNameBook"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/custom_edittext"
+                android:gravity="start|center_vertical"
+                android:hint="שינוי שם הספר"
+                android:padding="16dp"
+                android:inputType="textUri"
+                android:textColor="@color/lavender"
+                android:textDirection="rtl"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="שינוי שם/שמות המחבר/ים:"
+                android:textColor="@color/lavender"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="3dp"/>
+
+            <EditText
+                android:id="@+id/changeAuthorsName"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/custom_edittext"
+                android:gravity="start|center_vertical"
+                android:hint="שינוי שם/שמות המחבר/ים"
+                android:padding="16dp"
+                android:inputType="textUri"
+                android:textColor="@color/lavender"
+                android:textDirection="rtl"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="הוספת תמונת ספר:"
+                android:textColor="@color/lavender"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="3dp"/>
+            <Button
+                android:id="@+id/btnSelectImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="בחר תמונה מהגלריה"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/changeImage"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_edittext"
+                android:gravity="start|center_vertical"
+                android:hint="שינוי תמונה"
+                android:padding="16dp"
+                android:inputType="textUri"
+                android:textColor="@color/lavender"
+                android:textDirection="rtl"
+                android:visibility="gone"/>
+
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

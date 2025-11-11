@@ -1,10 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Addbook">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/custom_edittext"
+            android:orientation="vertical"
+            android:padding="1dp">
+
+            <!-- Title of the screen -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="הוספת ספר חדש"
+                android:textAlignment="center"
+                android:textColor="@color/lavender"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+
+            <!-- Book Cover Image Upload Placeholder -->
+
+            <!-- 1. Book Name Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="הוספת תמונת ספר:"
+                android:textColor="@color/lavender"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="3dp"/>
+            <Button
+                android:id="@+id/btnSelectImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="בחר תמונה מהגלריה"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="10dp"/>
+            <!--            <EditText-->
+            <!--                android:id="@+id/uploadImageUrl"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="60dp"-->
+            <!--                android:layout_marginTop="20dp"-->
+            <!--                android:background="@drawable/custom_edittext"-->
+            <!--                android:gravity="start|center_vertical"-->
+            <!--                android:hint="קישור לתמונת כריכת הספר (URL)"-->
+            <!--                android:padding="16dp"-->
+            <!--                android:inputType="textUri"-->
+            <!--                android:textColor="@color/lavender"-->
+            <!--                android:textDirection="rtl"/>-->
+
+            <EditText
+                android:id="@+id/nameofbook"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_edittext"
+                android:gravity="start|center_vertical"
+                android:hint="שם הספר: השם המלא"
+                android:padding="16dp"
+                android:textColor="@color/lavender"
+                android:textDirection="rtl"/>
+
+            <!-- 2. Author's Name Input -->
+            <EditText
+                android:id="@+id/authorsname"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_edittext"
+                android:gravity="start|center_vertical"
+                android:hint="שם/שמות המחבר/ים: מי כתב את הספר"
+                android:padding="16dp"
+                android:textColor="@color/lavender"
+                android:textDirection="rtl"/>
+
+            <!-- 3. Pages Count Input (Corrected ID and input type) -->
+            <EditText
+                android:id="@+id/uploadPagesCount"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_edittext"
+                android:gravity="start|center_vertical"
+                android:hint="מספר עמודים: סך העמודים בספר"
+                android:padding="16dp"
+                android:inputType="number"
+                android:textColor="@color/lavender"
+                android:textDirection="rtl"/>
+
+            <!-- 4. Category Selector (Updated to Spinner) -->
+            <Spinner
+                android:id="@+id/uploadCategory"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_edittext"
+                android:padding="16dp"
+                android:spinnerMode="dropdown"
+                />
+            <!-- הערה: יש להגדיר את רשימת הקטגוריות (book_categories_placeholder) בתוך קובץ res/values/arrays.xml. יש לוודא שהצבעים תואמים את lavander. -->
+
+            <!-- 5. Start Reading Date Input (NEW FIELD - set to date input type) -->
+            <EditText
+                android:id="@+id/uploadStartDate"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_edittext"
+                android:gravity="start|center_vertical"
+                android:hint="תאריך תחילת הקריאה (YYYY-MM-DD)"
+                android:padding="16dp"
+                android:inputType="date"
+                android:textColor="@color/lavender"
+                android:textDirection="rtl"/>
+
+            <!-- Save Button -->
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:text="שמור ספר"
+                android:textSize="18sp"
+                app:cornerRadius="20dp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</ScrollView>
