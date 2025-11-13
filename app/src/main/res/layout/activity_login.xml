@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="כניסה"
                 android:id="@+id/loginText"
                 android:textSize="36sp"
                 android:textAlignment="center"
@@ -37,7 +37,7 @@
                 android:background="@drawable/custom_edittext"
                 android:layout_marginTop="40dp"
                 android:padding="8dp"
-                android:hint="Email"
+                android:hint="אימייל"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:textColor="@color/black"
                 android:drawablePadding="8dp"/>
@@ -49,7 +49,7 @@
                 android:layout_marginTop="20dp"
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:hint="Password"
+                android:hint="סיסמה"
                 android:drawableLeft="@drawable/baseline_lock_24"
                 android:textColor="@color/black"
                 android:drawablePadding="8dp"/>
@@ -60,7 +60,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/Cyan_green"
-                android:text="Login"
+                android:text="התחברות"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
 
@@ -71,7 +71,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:padding="8dp"
-                android:text="Forgot Password?"
+                android:text="שכחת סיסמה? לחץ כאן"
                 android:textColor="@color/lavender"
                 android:textSize="16sp" />
 
@@ -82,7 +82,7 @@
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:layout_gravity="center"
-                android:text="Not yet registered? Sign Up"
+                android:text="עדיין לא נרשמת? הירשם"
                 android:textAlignment="center"
                 android:textColor="@color/lavender"
                 android:textSize="18sp" />
