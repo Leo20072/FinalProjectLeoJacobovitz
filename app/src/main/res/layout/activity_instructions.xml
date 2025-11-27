@@ -58,7 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:background="#FFFBF0">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -71,7 +72,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="#E0FFFF">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -85,15 +87,6 @@
                     <LinearLayout
                         style="@style/FeatureItemRow"
                         android:layout_marginBottom="10dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2.5"
-                            android:text="עדכון מספר העמודים שנקראו בלחיצה, וקבלת תצוגה גרפית של ההתקדמות שלך."
-                            android:textSize="16sp"
-                            android:textColor="#333"/>
-
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -103,20 +96,24 @@
                             android:textStyle="bold"
                             android:gravity="right"
                             android:textColor="#2c3e50"/>
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:text="עדכון מספר העמודים שנקראו בלחיצה, וקבלת תצוגה גרפית של ההתקדמות שלך."
+                            android:textSize="16sp"
+                            android:textColor="#333"
+                            android:layout_marginRight="10dp"/>
+
+
                     </LinearLayout>
                     <View style="@style/Divider" />
 
                     <LinearLayout
                         style="@style/FeatureItemRow"
                         android:layout_marginBottom="10dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2.5"
-                            android:text="הוספת ספרים חדשים עם כל הפרטים הרלוונטיים (כותר, מחבר, ז'אנר ועוד)."
-                            android:textSize="16sp"
-                            android:textColor="#333"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -127,6 +124,17 @@
                             android:textStyle="bold"
                             android:gravity="right"
                             android:textColor="#2c3e50"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:text="הוספת ספרים חדשים עם כל הפרטים הרלוונטיים (כותר, מחבר, ז'אנר ועוד)."
+                            android:textSize="16sp"
+                            android:textColor="#333"
+                            android:layout_marginRight="10dp"/>
+
+
                     </LinearLayout>
                     <View style="@style/Divider" />
 
@@ -137,20 +145,23 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2.5"
-                            android:text="פרסום דירוגים ותגובות לאחר סיום ספר, ושיתוף מיידי בפורום קוראים."
-                            android:textSize="16sp"
-                            android:textColor="#333"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="קהילת קוראים חברתית"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:gravity="right"
                             android:textColor="#2c3e50"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:text="פרסום דירוגים ותגובות לאחר סיום ספר, ושיתוף מיידי בפורום קוראים."
+                            android:textSize="16sp"
+                            android:textColor="#333"
+                            android:layout_marginRight="10dp"/>
+
+
                     </LinearLayout>
                     <View style="@style/Divider" />
 
@@ -161,20 +172,22 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2.5"
-                            android:text="קבל המלצות קריאה מותאמות אישית ומידע מעניין על ספרים ישנים וחדשים."
-                            android:textSize="16sp"
-                            android:textColor="#333"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="כוחה של הבינה המלאכותית (AI)"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:gravity="right"
                             android:textColor="#2c3e50"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:text="קבל המלצות קריאה מותאמות אישית ומידע מעניין על ספרים ישנים וחדשים."
+                            android:textSize="16sp"
+                            android:textColor="#333"
+                            android:layout_marginRight="10dp"/>
+
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -190,7 +203,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="#E0FFFF">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -205,22 +219,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="1. כניסה מאובטחת: התחילו בתהליך הרשמה וכניסה מהיר ומאובטח."
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginBottom="8dp"
+                        android:textSize="16sp"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="2. הוספת ספר: הוסיפו את הספר הנוכחי שלכם לספרייה האישית."
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginBottom="8dp"
+                        android:textSize="16sp"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="3. עדכון התקדמות: עדכנו בקלות את מספר העמודים שקראתם."
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginBottom="8dp"
+                        android:textSize="16sp"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="4. סיום ודירוג: סיימתם? דרגו והוסיפו תגובה – הדירוג מתפרסם בקהילה!"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginBottom="8dp"
+                        android:textSize="16sp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -234,7 +252,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="#E0FFFF">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -248,7 +267,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="עמוד הבינה המלאכותית שלנו הוא כלי הגילוי האולטימטיבי. בין אם אתם מחפשים המלצה לספר הבא שמותאם לטעם האישי שלכם, או שאתם רוצים ללמוד עובדות מעניינות על הספר שאתם קוראים עכשיו – ה-AI של BookFlow כאן בשבילכם."/>
+                        android:text="עמוד הבינה המלאכותית שלנו הוא כלי הגילוי האולטימטיבי. בין אם אתם מחפשים המלצה לספר הבא שמותאם לטעם האישי שלכם, או שאתם רוצים ללמוד עובדות מעניינות על הספר שאתם קוראים עכשיו – ה-AI של BookFlow כאן בשבילכם."
+                        android:textSize="16sp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
