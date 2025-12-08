@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,12 +25,14 @@ import com.orhanobut.dialogplus.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     private final Context context;
     private List<Book> booksList;
     private List<String> bookKeys; // המפתחות של Firebase לפעולות מחיקה/עדכון
+
 
     // 1. קונסטרוקטור
     public BookAdapter(Context context) {
@@ -44,8 +47,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         TextView title, author, pages, category, startDate;
         Button btnView, btnEdit, btnDelete;
         private ImageView imageViewResult;
+        private ProgressBar progressBar;
+        private TextView percentageText;
 
-        AlertDialog dialog;
+      ;
 
         public BookViewHolder(View itemView) {
             super(itemView);
@@ -55,10 +60,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             pages = itemView.findViewById(R.id.tv_pages_count);
             category = itemView.findViewById(R.id.tv_category);
             startDate = itemView.findViewById(R.id.tv_start_date); // חדש
+            progressBar = itemView.findViewById(R.id.horizontal_progress_bar);
+            percentageText = itemView.findViewById(R.id.progress_percentage_text);
 
             btnView = itemView.findViewById(R.id.btn_view);
             btnEdit = itemView.findViewById(R.id.btn_edit);
             btnDelete = itemView.findViewById(R.id.btn_delete);
+
         }
     }
 
@@ -87,6 +95,38 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.category.setText("קטגוריה: " + currentBook.getUploadCategory());
         holder.startDate.setText("התחלה: " + currentBook.getUploadStartDate());
         holder.imageViewResult.setImageBitmap(decodedBitmap);
+
+        try {
+            int totalPages = Integer.parseInt(currentBook.getUploadPagesCount());
+            int pagesRead = Integer.parseInt(currentBook.getPagesread()); // נניח ש-getPagesread מחזיר את העמוד הנוכחי
+
+            // א. הגדרת המקסימום וההתקדמות
+            holder.progressBar.setMax(totalPages);
+            // יש לוודא ש-pagesRead לא גדול מ-totalPages
+            holder.progressBar.setProgress(Math.min(pagesRead, totalPages));
+
+            // ב. חישוב האחוזים
+            double percentage = 0.0;
+            if (totalPages > 0) {
+                percentage = ((double) pagesRead / totalPages) * 100;
+            }
+
+            String percentageDisplay = String.format(Locale.US, "%.0f%%", percentage);
+
+            // ג. הצגת הטקסט
+            if (pagesRead >= totalPages) {
+                holder.percentageText.setText("הושלם! 100% 🎉");
+            } else {
+                holder.percentageText.setText(pagesRead + " מתוך " + totalPages + " (" + percentageDisplay + ")");
+            }
+
+        } catch (NumberFormatException e) {
+            // טיפול בשגיאה אם הנתונים מ-Firebase אינם מספרים תקינים
+            holder.percentageText.setText("שגיאת נתונים");
+            holder.progressBar.setProgress(0);
+            e.printStackTrace();
+        }
+
 
 
         // טיפול בלחיצות על הכפתורים
@@ -125,6 +165,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             System.out.println("לחצת על צפה לספר: " + currentBook.getNameOfBook());
         });
     }
+
+
 
 
     // 5. קבלת מספר הפריטים ברשימה

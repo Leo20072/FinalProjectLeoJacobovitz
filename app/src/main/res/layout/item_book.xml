@@ -82,6 +82,25 @@
             android:layout_marginTop="10dp"
             android:contentDescription="תמונה משוחזרת מ-Base64" />
 
+        <ProgressBar
+            android:id="@+id/horizontal_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="0"
+            android:indeterminate="false" />
+
+        <TextView
+            android:id="@+id/progress_percentage_text"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"/>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
