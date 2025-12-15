@@ -1,5 +1,6 @@
 package com.example.finalprojectleojacobovitz;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -81,8 +82,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
 
         // טיפול בלחיצה על כפתור תגובות
         holder.btnComments.setOnClickListener(v -> {
-            // כרגע רק נדפיס הודעה, בהמשך נעשה שזה יפתח מסך תגובות
-            Toast.makeText(context, "פתור תגובות לספר: " + currentBookId, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, CommentsActivity.class);
+            // אנו שולחים את ה-Key (שהוא ה-bookId) כדי לדעת איזה תגובות לפתוח
+            intent.putExtra("BOOK_ID_KEY", currentBookId);
+            context.startActivity(intent);
         });
     }
 

@@ -149,6 +149,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             DatabaseReference userBooksRef = booksRootRef.child(userId);
             userBooksRef.child(currentKey).removeValue();
 
+            // 3. מחיקה מהפיד הציבורי (all_posts)
+            // הערה: removeValue לא יקרוס גם אם אין פוסט כזה, הוא פשוט לא יעשה כלום - וזה מצוין לנו
+            DatabaseReference postRef = FirebaseDatabase.getInstance()
+                    .getReference("all_posts")
+                    .child(currentKey);
+            postRef.removeValue();
+
 
 
 
