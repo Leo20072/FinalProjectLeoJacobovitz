@@ -3,6 +3,7 @@ package com.example.finalprojectleojacobovitz;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -116,6 +117,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             // ג. הצגת הטקסט
             if (pagesRead >= totalPages) {
                 holder.percentageText.setText("הושלם! 100% 🎉");
+                // יצירת Intent למעבר למסך הדירוג
+                if (!currentBook.isHasPost()){
+                Intent intent = new Intent(context, RateAndPostActivity.class);
+                intent.putExtra("BOOK_ID", currentKey);       // ה-ID של הספר (ה-Key מפיירבייס)
+                intent.putExtra("BOOK_NAME", currentBook.getNameOfBook());
+                intent.putExtra("BOOK_AUTHOR", currentBook.getAuthorsname());
+                intent.putExtra("BOOK_IMAGE", currentBook.getUploadImageUrl());
+                context.startActivity(intent);
+                }
             } else {
                 holder.percentageText.setText(pagesRead + " מתוך " + totalPages + " (" + percentageDisplay + ")");
             }

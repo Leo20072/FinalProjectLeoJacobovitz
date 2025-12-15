@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="כל הכבוד! סיימת לקרוא! 🎉"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#2E7D32"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:id="@+id/tv_book_title_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="שם הספר"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/tv_book_author_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="שם הסופר"
+            android:textSize="16sp"
+            android:layout_marginBottom="32dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="מה דעתך על הספר?"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <RatingBar
+            android:id="@+id/ratingBar_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1.0"
+            android:layout_marginBottom="24dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="שתף את המחשבות שלך (פוסט)..."
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_post_content"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:inputType="textMultiLine"
+                android:gravity="top|start"
+                android:padding="12dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_publish_post"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="פרסם פוסט ודירוג"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp"/>
+
+        <Button
+            android:id="@+id/btn_skip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="לא עכשיו, תודה"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+</ScrollView>

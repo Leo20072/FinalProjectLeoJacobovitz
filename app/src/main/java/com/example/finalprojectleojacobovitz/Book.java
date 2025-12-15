@@ -8,6 +8,7 @@ public class Book {
     private String uploadCategory;
     private String uploadStartDate;
     private String pagesread;
+    public boolean hasPost; // <--- המשתנה החדש
 
     public String getPagesread() {
         return pagesread;
@@ -65,6 +66,14 @@ public class Book {
         this.uploadStartDate = uploadStartDate;
     }
 
+    public boolean isHasPost() {
+        return hasPost;
+    }
+
+    public void setHasPost(boolean hasPost) {
+        this.hasPost = hasPost;
+    }
+
     public Book(){
     }
     public Book(String nameOfBook, String authorsname, String uploadPagesCount, String uploadImageUrl, String uploadCategory, String uploadStartDate, String pagesread) {
@@ -75,6 +84,7 @@ public class Book {
         this.uploadCategory = uploadCategory;
         this.uploadStartDate = uploadStartDate;
         this.pagesread = pagesread;
+        this.hasPost = false;
     }
 
 }
