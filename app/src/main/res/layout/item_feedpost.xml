@@ -34,7 +34,8 @@
                 android:layout_height="wrap_content"
                 android:text="שם משתמש"
                 android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_marginRight="20dp"/>
 
             <TextView
                 android:id="@+id/tv_post_date"

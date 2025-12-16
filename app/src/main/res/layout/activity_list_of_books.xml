@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#FFFBF0">
 
     <TextView
         android:id="@+id/tv_header"
@@ -30,7 +31,8 @@
         android:layout_height="match_parent"
         android:layout_below="@id/tv_header"
         android:padding="8dp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        />
 
     <ProgressBar
         android:id="@+id/progress_bar"
