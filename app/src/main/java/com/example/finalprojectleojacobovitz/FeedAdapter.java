@@ -8,10 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,77 +25,103 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
 
     private Context context;
     private List<FeedPost> feedList;
-    private List<String> postKeys; // נשמור פה את ה-ID של הספר (בשביל התגובות)
+    private List<String> postKeys;
 
-    // בנאי (Constructor)
     public FeedAdapter(Context context) {
         this.context = context;
         this.feedList = new ArrayList<>();
         this.postKeys = new ArrayList<>();
     }
 
-    // פונקציה לעדכון הנתונים מבחוץ (מה-Activity)
     public void setPosts(List<FeedPost> posts, List<String> keys) {
         this.feedList = posts;
         this.postKeys = keys;
-        notifyDataSetChanged(); // מרענן את המסך
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public FeedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // כאן אנחנו מחברים את קובץ ה-XML שיצרנו (item_feed)
-        View view = LayoutInflater.from(context).inflate(R.layout.item_feedpost , parent, false);
+        // שים לב: ודא שהשם כאן תואם לקובץ ה-XML שלך (item_feedpost או item_feed)
+        View view = LayoutInflater.from(context).inflate(R.layout.item_feedpost, parent, false);
         return new FeedViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FeedViewHolder holder, int position) {
-        // שליפת הנתונים של הפוסט הנוכחי
         FeedPost currentPost = feedList.get(position);
         String currentBookId = postKeys.get(position);
 
-        // הצגת הנתונים על המסך
+        // --- הצגת הנתונים הרגילים ---
         holder.tvUserName.setText(currentPost.userName);
         holder.tvDate.setText(currentPost.postDate);
         holder.tvBookName.setText(currentPost.bookName);
         holder.tvAuthorName.setText(currentPost.authorName);
         holder.tvPostContent.setText(currentPost.postContent);
 
-        // --- הוספת הטיפול בדירוג ---
+        // הצגת הדירוג
         if (currentPost.rating != null && !currentPost.rating.isEmpty()) {
             try {
-                // המרת ה-String למספר כדי שהכוכבים יופיעו
-                float ratingValue = Float.parseFloat(currentPost.rating);
-                holder.ratingBar.setRating(ratingValue);
+                holder.ratingBar.setRating(Float.parseFloat(currentPost.rating));
             } catch (NumberFormatException e) {
-                holder.ratingBar.setRating(0); // אם יש שגיאה בנתונים
+                holder.ratingBar.setRating(0);
+            }
+        }
+
+        // הצגת תמונה (אם יש)
+        if (currentPost.imageBase64 != null && !currentPost.imageBase64.isEmpty()) {
+            Bitmap bookImage = decodeBase64(currentPost.imageBase64);
+            if (bookImage != null) {
+                holder.ivBookImage.setImageBitmap(bookImage);
+                holder.ivBookImage.setVisibility(View.VISIBLE);
+            } else {
+                holder.ivBookImage.setVisibility(View.GONE);
             }
         } else {
-            holder.ratingBar.setRating(0);
+            holder.ivBookImage.setVisibility(View.GONE);
         }
 
-        // --- הוספת הטיפול בתמונה ---
-        if (currentPost.imageBase64 != null && !currentPost.imageBase64.isEmpty()) {
-            // המרה מ-Base64 ל-Bitmap
-            Bitmap bookImage = decodeBase64(currentPost.imageBase64);
-            holder.ivBookImage.setImageBitmap(bookImage);
-            holder.ivBookImage.setVisibility(View.VISIBLE);
-        } else {
-            // אם אין תמונה, נסתיר את ה-ImageView
-            holder.ivBookImage.setVisibility(View.GONE); // או שנשים תמונת ברירת מחדל
-        }
+        // -----------------------------------------------------------
+        // --- החלק החדש: ספירת התגובות ועדכון הכפתור ---
+        // -----------------------------------------------------------
+        DatabaseReference commentsRef = FirebaseDatabase.getInstance()
+                .getReference("comments")
+                .child(currentBookId);
 
-        // טיפול בלחיצה על כפתור תגובות
+        // מאזין חד-פעמי (SingleValue) כדי לא להעמיס על הרשת
+        commentsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long count = snapshot.getChildrenCount(); // ספירת התגובות
+
+                if (count > 0) {
+                    holder.btnComments.setText("תגובות (" + count + ")");
+                } else {
+                    holder.btnComments.setText("תגובות"); // או "אין תגובות"
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                holder.btnComments.setText("תגובות");
+            }
+        });
+
+
+        // לחיצה על הכפתור למעבר למסך התגובות
         holder.btnComments.setOnClickListener(v -> {
             Intent intent = new Intent(context, CommentsActivity.class);
-            // אנו שולחים את ה-Key (שהוא ה-bookId) כדי לדעת איזה תגובות לפתוח
             intent.putExtra("BOOK_ID_KEY", currentBookId);
             context.startActivity(intent);
         });
     }
 
-    // פונקציית עזר להמרה (אותה פונקציה שיש לך כנראה כבר באדפטר של הספרים)
+    @Override
+    public int getItemCount() {
+        return feedList.size();
+    }
+
+    // פונקציית עזר להמרת תמונה
     private Bitmap decodeBase64(String input) {
         try {
             byte[] decodedByte = Base64.decode(input, Base64.DEFAULT);
@@ -100,30 +132,23 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
         }
     }
 
-    @Override
-    public int getItemCount() {
-        return feedList.size();
-    }
-
-    // המחלקה הפנימית שמחזיקה את הרכיבים מה-XML
+    // ה-ViewHolder
     public static class FeedViewHolder extends RecyclerView.ViewHolder {
-
         TextView tvUserName, tvDate, tvBookName, tvAuthorName, tvPostContent;
+        RatingBar ratingBar;
         Button btnComments;
-        android.widget.RatingBar ratingBar; // <--- החדש
-        android.widget.ImageView ivBookImage; // <--- חדש
+        ImageView ivBookImage;
 
         public FeedViewHolder(@NonNull View itemView) {
             super(itemView);
-
             tvUserName = itemView.findViewById(R.id.tv_post_user_name);
             tvDate = itemView.findViewById(R.id.tv_post_date);
             tvBookName = itemView.findViewById(R.id.tv_post_book_name);
             tvAuthorName = itemView.findViewById(R.id.tv_post_author);
             tvPostContent = itemView.findViewById(R.id.tv_post_content);
+            ratingBar = itemView.findViewById(R.id.ratingBar_post);
             btnComments = itemView.findViewById(R.id.btn_comments);
-            ratingBar = itemView.findViewById(R.id.ratingBar_post); // <--- החדש
-            ivBookImage = itemView.findViewById(R.id.iv_post_image); // <--- חדש
+            ivBookImage = itemView.findViewById(R.id.iv_post_image);
         }
     }
 }
