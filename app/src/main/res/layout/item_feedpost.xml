@@ -84,7 +84,7 @@
             android:id="@+id/tv_post_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="כאן יופיע תוכן הביקורת שהמשתמש כתב..."
+            android:text="תוכן הביקורת"
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
 
