@@ -47,7 +47,6 @@ public class AiActivity extends AppCompatActivity {
                     q = "מה הספר הכי נפוץ בישראל";
 
                 String prompt = q + "תשובה עד 50 מילים";
-                //String prompt = "What is the capital of France?";
                 GeminiManager.getInstance().sendMessage(prompt, new GeminiCallback() {
                     @Override
                     public void onSuccess(String response) {

@@ -35,7 +35,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     private List<String> bookKeys; // המפתחות של Firebase לפעולות מחיקה/עדכון
 
 
-    // 1. קונסטרוקטור
+
     public BookAdapter(Context context) {
         this.context = context;
         this.booksList = new ArrayList<>();
@@ -71,7 +71,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         }
     }
 
-    // 3. יצירת ה-ViewHolder (מנפח את ה-XML)
+    // 3. יצירת ה-ViewHolder
     @NonNull
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -101,12 +101,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             int totalPages = Integer.parseInt(currentBook.getUploadPagesCount());
             int pagesRead = Integer.parseInt(currentBook.getPagesread()); // נניח ש-getPagesread מחזיר את העמוד הנוכחי
 
-            // א. הגדרת המקסימום וההתקדמות
+            // הגדרת המקסימום וההתקדמות
             holder.progressBar.setMax(totalPages);
-            // יש לוודא ש-pagesRead לא גדול מ-totalPages
+            // לוודא אם-pagesRead לא גדול מ-totalPages
             holder.progressBar.setProgress(Math.min(pagesRead, totalPages));
 
-            // ב. חישוב האחוזים
+            //  חישוב האחוזים
             double percentage = 0.0;
             if (totalPages > 0) {
                 percentage = ((double) pagesRead / totalPages) * 100;
@@ -114,13 +114,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
             String percentageDisplay = String.format(Locale.US, "%.0f%%", percentage);
 
-            // ג. הצגת הטקסט
+            // הצגת הטקסט
             if (pagesRead >= totalPages) {
                 holder.percentageText.setText("הושלם! 100% 🎉");
-                // יצירת Intent למעבר למסך הדירוג
                 if (!currentBook.isHasPost()){
                 Intent intent = new Intent(context, RateAndPostActivity.class);
-                intent.putExtra("BOOK_ID", currentKey);       // ה-ID של הספר (ה-Key מפיירבייס)
+                intent.putExtra("BOOK_ID", currentKey);
                 intent.putExtra("BOOK_NAME", currentBook.getNameOfBook());
                 intent.putExtra("BOOK_AUTHOR", currentBook.getAuthorsname());
                 intent.putExtra("BOOK_IMAGE", currentBook.getUploadImageUrl());
@@ -131,7 +130,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             }
 
         } catch (NumberFormatException e) {
-            // טיפול בשגיאה אם הנתונים מ-Firebase אינם מספרים תקינים
+            // טיפול בשגיאה אם הנתונים מ-Firebase אינם תקינים
             holder.percentageText.setText("שגיאת נתונים");
             holder.progressBar.setProgress(0);
             e.printStackTrace();
@@ -139,18 +138,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
 
 
-        // טיפול בלחיצות על הכפתורים
+        // טיפול בהכפתורים
         holder.btnDelete.setOnClickListener(v -> {
-            // קריאה לפונקציית מחיקה שתטמיע בהמשך
-            // handleBookDelete(currentKey);
             System.out.println("לחצת על מחק לספר ID: " + currentKey);
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             DatabaseReference booksRootRef = FirebaseDatabase.getInstance().getReference("books");
             DatabaseReference userBooksRef = booksRootRef.child(userId);
             userBooksRef.child(currentKey).removeValue();
 
-            // 3. מחיקה מהפיד הציבורי (all_posts)
-            // הערה: removeValue לא יקרוס גם אם אין פוסט כזה, הוא פשוט לא יעשה כלום - וזה מצוין לנו
+            //  מחיקה מהפיד הציבורי (all_posts)
+            // הערה- removeValue לא יקרוס גם אם אין פוסט כזה, הוא פשוט לא יעשה כלום
             DatabaseReference postRef = FirebaseDatabase.getInstance()
                     .getReference("all_posts")
                     .child(currentKey);
@@ -163,22 +160,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
 
         holder.btnEdit.setOnClickListener(v -> {
-            // קריאה לפונקציית עדכון שתטמיע בהמשך
-            // handleBookEdit(currentBook, currentKey);
             System.out.println("לחצת על עדכן לספר: " + currentBook.getNameOfBook());
 
-            //((ListOfBooks)context).createDialogEdit();
 
-            // הקריאה החוזרת ל-MainActivity
-            ///onEditBook(currentKey, currentBook);
             ((ListOfBooks)context).onEditBook(currentKey, currentBook);
-
 
 
         });
 
         holder.btnView.setOnClickListener(v -> {
-            // פעולת הצגת פרטים מלאים
             System.out.println("לחצת על צפה לספר: " + currentBook.getNameOfBook());
         });
     }
@@ -186,20 +176,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
 
 
-    // 5. קבלת מספר הפריטים ברשימה
+    // קבלת מספר הפריטים ברשימה
     @Override
     public int getItemCount() {
         return booksList.size();
     }
 
-    // 6. עדכון רשימת הספרים מה-Activity
+    // עדכון רשימת הספרים
     public void setBooks(List<Book> books, List<String> keys) {
         this.booksList = books;
         this.bookKeys = keys;
         notifyDataSetChanged(); // רענון ה-RecyclerView
     }
 
-    // --- פונקציה להמרת Base64 String חזרה ל-Bitmap (כמו בקוד הקודם) ---
+    // פונקציה להמרת Base64 String חזרה ל-Bitmap
     public static Bitmap decodeImage(String base64String) {
         byte[] decodedBytes = Base64.decode(base64String, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);

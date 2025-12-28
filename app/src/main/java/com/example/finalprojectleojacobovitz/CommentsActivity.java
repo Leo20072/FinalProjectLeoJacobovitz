@@ -41,7 +41,7 @@ public class CommentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
 
-        // 1. קבלת ה-ID מה-Intent
+        // קבלת ה-ID מה-Intent
         if (getIntent() != null) {
             bookId = getIntent().getStringExtra("BOOK_ID_KEY");
         }
@@ -52,7 +52,7 @@ public class CommentsActivity extends AppCompatActivity {
             return;
         }
 
-        // 2. אתחול
+        // אתחול
         recyclerView = findViewById(R.id.recycler_view_comments);
         etInput = findViewById(R.id.et_comment_input);
         btnSend = findViewById(R.id.btn_send_comment);
@@ -64,10 +64,10 @@ public class CommentsActivity extends AppCompatActivity {
         // הפניה לענף התגובות הספציפי של הספר הזה
         commentsRef = FirebaseDatabase.getInstance().getReference("comments").child(bookId);
 
-        // 3. טעינת תגובות
+        // טעינת תגובות
         loadComments();
 
-        // 4. שליחת תגובה
+        // שליחת תגובה
         btnSend.setOnClickListener(v -> postComment());
     }
 
@@ -80,16 +80,15 @@ public class CommentsActivity extends AppCompatActivity {
 
         String userId = user.getUid();
 
-        // 1. גישה ל-Firestore לשליפת השם
+        // גישה ל-Firestore לשליפת השם
         FirebaseFirestore fstore = FirebaseFirestore.getInstance();
         DocumentReference docRef = fstore.collection("users").document(userId);
 
         docRef.get().addOnSuccessListener(documentSnapshot -> {
-            // --- הכל קורה כאן בפנים אחרי שהשם הגיע ---
 
             String userName = "משתמש"; // ברירת מחדל
 
-            // בדיקה שהמסמך קיים ויש בו שם
+            // בדיקה שקיים ויש בו שם
             if (documentSnapshot.exists()) {
                 String fetchedName = documentSnapshot.getString("fName");
                 if (fetchedName != null && !fetchedName.isEmpty()) {
@@ -97,16 +96,16 @@ public class CommentsActivity extends AppCompatActivity {
                 }
             }
 
-            // 2. הכנת התאריך
+            // תאריך
             String time = new SimpleDateFormat("dd/MM HH:mm", Locale.getDefault()).format(new Date());
 
-            // 3. יצירת אובייקט התגובה עם השם הנכון
+            //  יצירת אובייקט התגובה עם השם
             Comment newComment = new Comment(text, userId, userName, time);
 
-            // 4. שמירה ב-Realtime Database
+            //  שמירה ב-Realtime Database
             commentsRef.push().setValue(newComment)
                     .addOnSuccessListener(aVoid -> {
-                        etInput.setText(""); // ניקוי תיבת הטקסט
+                        etInput.setText("");
 
                         // גלילה למטה לתגובה החדשה
                         if (adapter.getItemCount() > 0) {

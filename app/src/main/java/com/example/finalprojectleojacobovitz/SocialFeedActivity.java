@@ -30,7 +30,7 @@ public class SocialFeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_feed);
 
-        // 1. אתחול רכיבים
+        //  אתחול רכיבים
         btnBack = findViewById(R.id.btn_back_feed);
         recyclerView = findViewById(R.id.recyclerView_feed);
 
@@ -44,7 +44,7 @@ public class SocialFeedActivity extends AppCompatActivity {
         // כפתור חזרה
         btnBack.setOnClickListener(v -> finish());
 
-        // 2. הפעלת הטעינה מפיירבייס
+        // הפעלת הטעינה מפיירבייס
         loadPostsFromFirebase();
     }
 
@@ -58,7 +58,7 @@ public class SocialFeedActivity extends AppCompatActivity {
                 List<FeedPost> postsList = new ArrayList<>();
                 List<String> keysList = new ArrayList<>();
 
-                // מעבר על כל הפוסטים שיש בשרת
+                // מעבר על כל הפוסטים
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     FeedPost post = postSnapshot.getValue(FeedPost.class);
                     String key = postSnapshot.getKey(); // זה ה-BookID
@@ -69,7 +69,7 @@ public class SocialFeedActivity extends AppCompatActivity {
                     }
                 }
 
-                // אופציונלי: להפוך את הרשימה כדי לראות את החדשים למעלה
+                // להפוך את הרשימה כדי לראות את החדשים למעלה
                 Collections.reverse(postsList);
                 Collections.reverse(keysList);
 
@@ -90,7 +90,7 @@ public class SocialFeedActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // הסרת המאזין ביציאה כדי לחסוך סוללה וזיכרון
+        // הסרת המאזין ביציאה
         if (allPostsRef != null && feedListener != null) {
             allPostsRef.removeEventListener(feedListener);
         }

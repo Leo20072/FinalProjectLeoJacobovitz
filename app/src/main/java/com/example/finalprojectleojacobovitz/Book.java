@@ -8,7 +8,7 @@ public class Book {
     private String uploadCategory;
     private String uploadStartDate;
     private String pagesread;
-    public boolean hasPost; // <--- המשתנה החדש
+    public boolean hasPost;
 
     public String getPagesread() {
         return pagesread;

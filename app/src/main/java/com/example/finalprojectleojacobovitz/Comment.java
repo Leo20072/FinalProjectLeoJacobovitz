@@ -2,7 +2,7 @@ package com.example.finalprojectleojacobovitz;
 
 public class Comment {
     public String content;      // תוכן התגובה
-    public String userId;       // מזהה המשתמש (כדי שנוכל לזהות מי כתב)
+    public String userId;       // מזהה המשתמש
     public String userName;     // שם המשתמש לתצוגה
     public String timestamp;    // מתי נכתבה
 

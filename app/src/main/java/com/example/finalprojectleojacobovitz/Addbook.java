@@ -60,7 +60,6 @@ public class Addbook extends AppCompatActivity implements AdapterView.OnItemSele
         setContentView(R.layout.activity_addbook);
         btnSelectImage = findViewById(R.id.btnSelectImage);
 
-        // הגדרת המאזין (Listener) לכפתור
         btnSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +111,7 @@ public class Addbook extends AppCompatActivity implements AdapterView.OnItemSele
                         userBooksRef.child(newBookId).setValue(newbook)
                                 .addOnSuccessListener(aVoid -> {
                                     Toast.makeText(Addbook.this, "Book saved successfully for user: " + userId, Toast.LENGTH_SHORT).show();
-                                    // עדכון ממשק המשתמש (UI) בהצלחה
+                                    // עדכון ממשק המשתמש
                                     finish();
                                 })
                                 .addOnFailureListener(e -> {
@@ -141,14 +140,14 @@ public class Addbook extends AppCompatActivity implements AdapterView.OnItemSele
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // ודא שהתוצאה היא מתאימה (בחירת תמונה הצליחה)
+        // ודא שהתוצאה היא מתאימה
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri imageUri = data.getData();
             try {
                 // המרת ה-URI ל-Bitmap
                 Bitmap selectedBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
 
-                // --- המרה ל-Base64 ---
+                // המרה ל-Base64
                 base64String =encodeImage(selectedBitmap);
                 Log.d(TAG, "Encoded Base64 String: " + base64String.substring(0, Math.min(base64String.length(), 50)) + "...");
                 Toast.makeText(this, "התמונה קודדה ל-Base64", Toast.LENGTH_SHORT).show();
@@ -171,10 +170,9 @@ public class Addbook extends AppCompatActivity implements AdapterView.OnItemSele
 
     }
 
-    // --- פונקציה להמרת Bitmap ל-Base64 (כמו בקוד הקודם) ---
+    //  פונקציה להמרת Bitmap ל-Base64
     public static String encodeImage(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        // דחיסה עם איכות, ניתן לשנות את האיכות כאן אם התמונה גדולה מדי
         bitmap.compress(Bitmap.CompressFormat.JPEG, 75, outputStream);
         byte[] imageBytes = outputStream.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);

@@ -52,7 +52,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
         FeedPost currentPost = feedList.get(position);
         String currentBookId = postKeys.get(position);
 
-        // --- הצגת הנתונים הרגילים ---
+        // הצגת הנתונים
         holder.tvUserName.setText(currentPost.userName);
         holder.tvDate.setText(currentPost.postDate);
         holder.tvBookName.setText(currentPost.bookName);
@@ -68,7 +68,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
             }
         }
 
-        // הצגת תמונה (אם יש)
+        // הצגת תמונה
         if (currentPost.imageBase64 != null && !currentPost.imageBase64.isEmpty()) {
             Bitmap bookImage = decodeBase64(currentPost.imageBase64);
             if (bookImage != null) {
@@ -81,14 +81,11 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
             holder.ivBookImage.setVisibility(View.GONE);
         }
 
-        // -----------------------------------------------------------
-        // --- החלק החדש: ספירת התגובות ועדכון הכפתור ---
-        // -----------------------------------------------------------
+
         DatabaseReference commentsRef = FirebaseDatabase.getInstance()
                 .getReference("comments")
                 .child(currentBookId);
 
-        // מאזין חד-פעמי (SingleValue) כדי לא להעמיס על הרשת
         commentsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -97,7 +94,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
                 if (count > 0) {
                     holder.btnComments.setText("תגובות (" + count + ")");
                 } else {
-                    holder.btnComments.setText("תגובות"); // או "אין תגובות"
+                    holder.btnComments.setText("תגובות");
                 }
             }
 
@@ -108,7 +105,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
         });
 
 
-        // לחיצה על הכפתור למעבר למסך התגובות
         holder.btnComments.setOnClickListener(v -> {
             Intent intent = new Intent(context, CommentsActivity.class);
             intent.putExtra("BOOK_ID_KEY", currentBookId);
@@ -121,7 +117,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
         return feedList.size();
     }
 
-    // פונקציית עזר להמרת תמונה
+    // פונקציית המרת תמונה
     private Bitmap decodeBase64(String input) {
         try {
             byte[] decodedByte = Base64.decode(input, Base64.DEFAULT);

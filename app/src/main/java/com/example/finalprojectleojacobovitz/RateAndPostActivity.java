@@ -74,38 +74,35 @@ public class RateAndPostActivity extends AppCompatActivity {
         savePostToFirebase(bookId, bookName, authorName, content, ratingString);
     }
 
-    // --- הפונקציה המתוקנת ---
     private void savePostToFirebase(String bId, String bName, String bAuthor, String content, String rating) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) return;
 
-        // 1. גישה ל-Firestore כדי לשלוף את השם
+        //  גישה ל-Firestore כדי לשלוף את השם
         FirebaseFirestore fstore = FirebaseFirestore.getInstance();
         String userId = user.getUid();
 
-        // נשתמש ב-get() במקום addSnapshotListener כי אנחנו צריכים את המידע רק פעם אחת ברגע השמירה
         DocumentReference documentReference = fstore.collection("users").document(userId);
 
         documentReference.get().addOnSuccessListener(documentSnapshot -> {
-            // --- הכל קורה כאן בפנים אחרי שהמידע הגיע ---
 
             String userName = "קורא אנונימי"; // ברירת מחדל
 
             if (documentSnapshot.exists()) {
-                // שליפת השם (השתמשתי ב-fName כמו בקוד שלך)
+                // שליפת השם
                 String fetchedName = documentSnapshot.getString("fName");
                 if (fetchedName != null && !fetchedName.isEmpty()) {
                     userName = fetchedName;
                 }
             }
 
-            // 2. יצירת התאריך
+            // יצירת התאריך
             String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
 
-            // 3. יצירת האובייקט עם השם ששלפנו מ-Firestore
+            // יצירת האובייקט עם השם ששלפנו מ-Firestore
             FeedPost post = new FeedPost(bName, bAuthor, content, userName, date, rating, bookImageBase64);
 
-            // 4. שמירה ב-Realtime Database
+            // שמירה ב-Realtime Database
             DatabaseReference allPostsRef = FirebaseDatabase.getInstance().getReference("all_posts");
 
             allPostsRef.child(bId).setValue(post)
@@ -126,7 +123,7 @@ public class RateAndPostActivity extends AppCompatActivity {
                     });
 
         }).addOnFailureListener(e -> {
-            // טיפול במקרה שלא הצלחנו להביא את השם מ-Firestore
+            // טיפול במקרה שלא הצליח להביא את השם מ-Firestore
             Toast.makeText(RateAndPostActivity.this, "שגיאה בשליפת פרטי משתמש", Toast.LENGTH_SHORT).show();
         });
     }
