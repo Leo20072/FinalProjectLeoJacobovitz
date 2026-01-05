@@ -106,6 +106,16 @@
                 android:textColor="@color/lavender"
                 android:textDirection="rtl"/>
 
+            <TextView
+                android:id="@+id/tv_post_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="אנא בחר את קטגוריה של הספר:"
+                android:layout_marginTop="20dp"
+
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
             <!-- 4. Category Selector (Updated to Spinner) -->
             <Spinner
                 android:id="@+id/uploadCategory"

@@ -42,7 +42,10 @@ import java.io.IOException;
 
 public class Addbook extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Spinner spinner;
-    private String[] arrCategories = { "מדע בדיוני", "פנטזיה", "מתח / מותחן", "בלשי", "רומן רומנטי", "אימה", "היסטורי" };
+    private String[] arrCategories = {
+            "לא ידוע", "הרפתקה","אמנות", "אוטוביוגרפיה", "ביוגרפיה", "עסקים", "ילדים", "קלאסי", "עכשווי", "בישול", "פשע", "דרמה", "כלכלה", "חינוך", "פנטזיה", "מדע בדיוני", "בריאות", "היסטורי", "היסטוריה", "אימה", "הומור", "מוזיקה", "מסתורין", "ספרי עיון", "פילוסופיה", "פסיכולוגיה", "דת", "רומן", "מדע", "עזרה עצמית", "ספורט", "טכנולוגיה", "מותחן", "טיולים", "נוער"
+    };
+
     private String choosecategory;
     EditText uploadImageUrl;
     Button saveButton;

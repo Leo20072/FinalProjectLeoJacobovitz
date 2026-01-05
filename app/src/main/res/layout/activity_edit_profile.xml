@@ -68,20 +68,21 @@
                 android:textColor="@color/Cyan_green"/>
 
             <!-- 1. שם מלא -->
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/edit_fullname"
-                android:background="@drawable/custom_edittext"
-                android:layout_marginTop="30dp"
-                android:padding="8dp"
-                android:hint="שם מלא"
-                android:drawableLeft="@drawable/baseline_supervised_user_circle_24"
-                android:drawablePadding="8dp"
-                android:inputType="textPersonName"
-                android:textColor="@color/black"/>
 
             <!-- 2. כתובת מייל -->
+            <EditText
+                android:id="@+id/edit_fullname"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/custom_edittext"
+                android:drawableLeft="@drawable/baseline_supervised_user_circle_24"
+                android:drawablePadding="8dp"
+                android:hint="שם מלא"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:textColor="@color/black" />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
