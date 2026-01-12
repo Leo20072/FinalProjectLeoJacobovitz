@@ -54,18 +54,15 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="16dp"
                 android:layout_marginTop="10dp"/>
-            <!--            <EditText-->
-            <!--                android:id="@+id/uploadImageUrl"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="60dp"-->
-            <!--                android:layout_marginTop="20dp"-->
-            <!--                android:background="@drawable/custom_edittext"-->
-            <!--                android:gravity="start|center_vertical"-->
-            <!--                android:hint="קישור לתמונת כריכת הספר (URL)"-->
-            <!--                android:padding="16dp"-->
-            <!--                android:inputType="textUri"-->
-            <!--                android:textColor="@color/lavender"-->
-            <!--                android:textDirection="rtl"/>-->
+
+            <ImageView
+                android:id="@+id/imageViewResult"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:contentDescription="תמונה משוחזרת מ-Base64" />
+
 
             <EditText
                 android:id="@+id/nameofbook"

@@ -57,6 +57,7 @@ public class Addbook extends AppCompatActivity implements AdapterView.OnItemSele
     private static final String TAG = "Base64Converter";
     private static final int PICK_IMAGE_REQUEST = 1;
     String base64String = "";
+    private ImageView imageViewResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +84,7 @@ public class Addbook extends AppCompatActivity implements AdapterView.OnItemSele
         uploadPagesCount = findViewById(R.id.uploadPagesCount);
         uploadStartDate = findViewById(R.id.uploadStartDate);
         saveButton = findViewById(R.id.saveButton);
+        imageViewResult = findViewById(R.id.imageViewResult);
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +151,8 @@ public class Addbook extends AppCompatActivity implements AdapterView.OnItemSele
             try {
                 // המרת ה-URI ל-Bitmap
                 Bitmap selectedBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+
+                imageViewResult.setImageBitmap(selectedBitmap);
 
                 // המרה ל-Base64
                 base64String =encodeImage(selectedBitmap);
