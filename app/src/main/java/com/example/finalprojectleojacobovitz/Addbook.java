@@ -97,7 +97,7 @@ public class Addbook extends AppCompatActivity implements AdapterView.OnItemSele
                 String startDate = uploadStartDate.getText().toString();
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user == null) {
-                    System.out.println("Error: User is not authenticated.");
+                    Toast.makeText(Addbook.this, "שגיאה: המשתמש לא אומת.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -110,7 +110,7 @@ public class Addbook extends AppCompatActivity implements AdapterView.OnItemSele
                     Book newbook = new Book(namebook, author, pagesCount, base64String, choosecategory,startDate,pagesread);
 
 
-                    // 4. שמירת הנתונים בנתיב החדש באמצעות setValue
+                    // שמירת הנתונים בנתיב החדש באמצעות setValue
                     if (!namebook.equals("") && !author.equals("") && !pagesCount.equals("") && !startDate.equals(""))
                     {
                         userBooksRef.child(newBookId).setValue(newbook)
@@ -125,7 +125,7 @@ public class Addbook extends AppCompatActivity implements AdapterView.OnItemSele
                                 });
                     }
                     else {
-                        Toast.makeText(Addbook.this, "Failed to save book", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Addbook.this, "שמירת הספר נכשלה", Toast.LENGTH_SHORT).show();
 
                     }
                 }

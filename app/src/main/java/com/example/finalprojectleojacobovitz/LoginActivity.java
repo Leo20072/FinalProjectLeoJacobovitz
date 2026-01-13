@@ -86,11 +86,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText resetMail = new EditText(v.getContext());
                 AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
-                passwordResetDialog.setTitle("Reset Password ?");
-                passwordResetDialog.setMessage("Enter Your Email To Received Reset Link");
+                passwordResetDialog.setTitle("לאפס סיסמה?");
+                passwordResetDialog.setMessage("הזן את כתובת האימייל שלך כדי לקבל קישור לאיפוס");
                 passwordResetDialog.setView(resetMail);
 
-                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                passwordResetDialog.setPositiveButton("אישור", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // extract the email and send reset link
@@ -101,12 +101,12 @@ public class LoginActivity extends AppCompatActivity {
                             auth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    Toast.makeText(LoginActivity.this, "Reset Link Sent To Your Email.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "איפוס קישור שנשלח לאימייל שלך.", Toast.LENGTH_SHORT).show();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(LoginActivity.this, "Error ! Reset Link Is Not Sent" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "שגיאה! קישור האיפוס לא נשלח" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                passwordResetDialog.setNegativeButton("ביטול", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // close the dialog

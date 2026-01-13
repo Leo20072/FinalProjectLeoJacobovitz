@@ -42,7 +42,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
     @NonNull
     @Override
     public FeedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // שים לב: ודא שהשם כאן תואם לקובץ ה-XML שלך (item_feedpost או item_feed)
         View view = LayoutInflater.from(context).inflate(R.layout.item_feedpost, parent, false);
         return new FeedViewHolder(view);
     }

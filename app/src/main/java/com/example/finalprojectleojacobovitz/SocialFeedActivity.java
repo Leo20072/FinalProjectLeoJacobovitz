@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SocialFeedActivity extends AppCompatActivity {
+public class  SocialFeedActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private FeedAdapter feedAdapter;
