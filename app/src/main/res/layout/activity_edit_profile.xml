@@ -11,7 +11,6 @@
     android:background="@color/lavender"
     tools:context=".EditProfileActivity">
 
-    <!-- כותרות עליונות -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +40,6 @@
         android:gravity="center"
         android:layout_marginBottom="30dp"/>
 
-    <!-- כרטיס CardView לעריכת הנתונים -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,38 +65,56 @@
                 android:textStyle="bold"
                 android:textColor="@color/Cyan_green"/>
 
-            <!-- 1. שם מלא -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="שם מלא"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="start"
+                android:textDirection="rtl"/>
 
-            <!-- 2. כתובת מייל -->
             <EditText
-                android:id="@+id/edit_fullname"
+                android:id="@+id/editFullName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="30dp"
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/baseline_supervised_user_circle_24"
                 android:drawablePadding="8dp"
-                android:hint="שם מלא"
+                android:hint="הכנס שם מלא"
                 android:inputType="textPersonName"
                 android:padding="8dp"
                 android:textColor="@color/black" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="כתובת אימייל"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="start"
+                android:textDirection="rtl"/>
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/edit_email"
+                android:id="@+id/editEmail"
                 android:background="@drawable/custom_edittext"
-                android:layout_marginTop="20dp"
                 android:padding="8dp"
-                android:hint="אימייל"
+                android:hint="example@email.com"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/black"/>
 
-            <!-- 3. כפתור שינוי סיסמה (עיצוב שונה) -->
             <Button
-                android:id="@+id/button_change_password"
+                android:id="@+id/btnResetPassword"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:text="שנה סיסמה (לחץ כאן)"
@@ -114,18 +130,16 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 />
 
-            <!-- כפתור שמירה -->
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="שמור שינויים"
-                android:id="@+id/save_changes_button"
+                android:id="@+id/btnSave"
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/Cyan_green"
                 app:cornerRadius = "20dp"/>
 
-            <!-- כפתור ביטול/חזור -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
