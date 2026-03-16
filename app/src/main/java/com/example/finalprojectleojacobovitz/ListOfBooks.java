@@ -140,83 +140,118 @@ public class ListOfBooks extends AppCompatActivity {
         View dialogView = inflater.inflate(R.layout.custom_dialog_edit, null);
         builder.setView(dialogView);
 
-        EditText etTitle = dialogView.findViewById(R.id.changeNameBook);
-        EditText etAuthor = dialogView.findViewById(R.id.changeAuthorsName);
-        EditText etPages = dialogView.findViewById(R.id.currentPagesCount);
-        EditText etImageUrl = dialogView.findViewById(R.id.changeImage);
+        EditText etTitle = dialogView.findViewById(R.id.editBookName);
+        EditText etAuthor = dialogView.findViewById(R.id.editAuthorName);
+
+        // זה השדה שמציג ונותן לערוך את סך כל העמודים
+        EditText etTotalPages = dialogView.findViewById(R.id.editTotalPages);
+
+        // זה השדה של העמוד הנוכחי
+        EditText etCurrentPage = dialogView.findViewById(R.id.editCurrentPage);
+
+        Button btnAdd1 = dialogView.findViewById(R.id.btnAdd1Page);
+        Button btnAdd10 = dialogView.findViewById(R.id.btnAdd10Pages);
         Button btnSelectImage = dialogView.findViewById(R.id.btnSelectImage);
+
         base64String = bookToEdit.getUploadImageUrl();
-        Button btnAdd1CurrentPagesCount = dialogView.findViewById(R.id.btnAdd1CurrentPagesCount);
 
-        btnSelectImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // קריאה לפונקציה לפתיחת הגלריה
-                openGallery();
-            }
-
-            private void openGallery() {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, PICK_IMAGE_REQUEST);
-            }
+        // פתיחת הגלריה לבחירת תמונה
+        btnSelectImage.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, PICK_IMAGE_REQUEST);
         });
 
-
-        //  מילוי השדות בנתונים הנוכחיים של הספר
+        // === מילוי הנתונים מהדאטה-בייס אל תוך המסך ===
         etTitle.setText(bookToEdit.getNameOfBook());
         etAuthor.setText(bookToEdit.getAuthorsname());
-        etPages.setText(bookToEdit.getUploadPagesCount()); // מילוי מספר העמודים
-        etImageUrl.setText(bookToEdit.getUploadImageUrl()); // מילוי התמונה
-        final int[] pagesRead = {Integer.parseInt(bookToEdit.getPagesread())};
-        btnAdd1CurrentPagesCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pagesRead[0] = pagesRead[0] + 1;
+
+        // מציג את סך הכל העמודים בספר (המשתמש יכול ללחוץ ולשנות את זה)
+        etTotalPages.setText(bookToEdit.getUploadPagesCount());
+
+        // מציג את העמוד הנוכחי
+        if (bookToEdit.getPagesread() != null && !bookToEdit.getPagesread().isEmpty()) {
+            etCurrentPage.setText(bookToEdit.getPagesread());
+        } else {
+            etCurrentPage.setText("0");
+        }
+
+        // פעולת +1 עם חסימה מלעבור את סך העמודים
+        btnAdd1.setOnClickListener(view -> {
+            int current = 0;
+            int total = 0;
+            try { current = Integer.parseInt(etCurrentPage.getText().toString().trim()); } catch (Exception ignored) {}
+            try { total = Integer.parseInt(etTotalPages.getText().toString().trim()); } catch (Exception ignored) {}
+
+            if (current + 1 <= total) {
+                etCurrentPage.setText(String.valueOf(current + 1));
+            } else {
+                Toast.makeText(this, "הגעת לסוף הספר!", Toast.LENGTH_SHORT).show();
+                etCurrentPage.setText(String.valueOf(total));
             }
         });
 
+        // פעולת +10 עם חסימה מלעבור את סך העמודים
+        btnAdd10.setOnClickListener(view -> {
+            int current = 0;
+            int total = 0;
+            try { current = Integer.parseInt(etCurrentPage.getText().toString().trim()); } catch (Exception ignored) {}
+            try { total = Integer.parseInt(etTotalPages.getText().toString().trim()); } catch (Exception ignored) {}
 
-        // כפתור 'שמור'
-        builder.setPositiveButton("שמור שינויים", (dialog, id) -> {
+            if (current + 10 <= total) {
+                etCurrentPage.setText(String.valueOf(current + 10));
+            } else {
+                Toast.makeText(this, "אי אפשר לעבור את סך העמודים!", Toast.LENGTH_SHORT).show();
+                etCurrentPage.setText(String.valueOf(total));
+            }
+        });
 
-            // קבלת הנתונים החדשים
+        builder.setPositiveButton("שמור שינויים", null);
+        builder.setNegativeButton("ביטול", (dialog, id) -> dialog.cancel());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // פעולת השמירה - מתבצעת רק לאחר בדיקת תקינות
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
             String newTitle = etTitle.getText().toString().trim();
             String newAuthor = etAuthor.getText().toString().trim();
-            String newPagesCount = etPages.getText().toString().trim();
-            String newImageUrl = base64String;
-            String newstrnaumpages = Integer.toString(pagesRead[0]);
+
+            // לוקחים את הנתון מהשדה (גם אם המשתמש שינה אותו עכשיו)
+            String newTotalPages = etTotalPages.getText().toString().trim();
+            String newCurrentPage = etCurrentPage.getText().toString().trim();
 
             if (newTitle.isEmpty() || newAuthor.isEmpty()) {
-                Toast.makeText(this, "שם הספר ושם המחבר אינם יכולים להיות ריקים.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "שם הספר ושם המחבר אינם יכולים להיות ריקים.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // יצירת אובייקט Book "מעודכן"
-            Book updatedBook = new Book();
+            int current = 0;
+            int total = 0;
+            try { current = Integer.parseInt(newCurrentPage); } catch (Exception ignored) {}
+            try { total = Integer.parseInt(newTotalPages); } catch (Exception ignored) {}
 
-            // שדות מעודכנים
+            if (current > total) {
+                Toast.makeText(this, "שגיאה: מספר העמודים שקראת (" + current + ") לא יכול להיות גדול מסך העמודים בספר (" + total + ")!", Toast.LENGTH_LONG).show();
+                etCurrentPage.setError("מספר גדול מדי");
+                return;
+            }
+
+            // שומרים את האובייקט המעודכן עם סך העמודים החדש (או הישן)
+            Book updatedBook = new Book();
             updatedBook.setNameOfBook(newTitle);
             updatedBook.setAuthorsname(newAuthor);
-            updatedBook.setUploadPagesCount(newPagesCount);
-            updatedBook.setUploadImageUrl(newImageUrl);
-            updatedBook.setPagesread(newstrnaumpages);
+            updatedBook.setUploadImageUrl(base64String);
+            updatedBook.setUploadPagesCount(newTotalPages); // שומר את סך העמודים
+            updatedBook.setPagesread(newCurrentPage);       // שומר את העמוד הנוכחי
 
-            // שדות שאינם לעריכה (העתקה מהאובייקט המקורי) ---
-            // נתונים אלה חשוביים כדי לא לאבד אותם ב-Firebase
+            // שדות שאינם לעריכה
             updatedBook.setUploadCategory(bookToEdit.getUploadCategory());
             updatedBook.setUploadStartDate(bookToEdit.getUploadStartDate());
 
-            // קריאה לשיטת העדכון ב-Firebase
             updateBook(bookKey, updatedBook);
-
             Toast.makeText(this, "הספר עודכן בהצלחה!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
         });
-
-        // כפתור 'ביטול'
-        builder.setNegativeButton("ביטול", (dialog, id) -> dialog.cancel());
-
-        // הצגת הדיאלוג
-        builder.create().show();
     }
 
     public void updateBook(String bookKey, Book updatedBook) {
