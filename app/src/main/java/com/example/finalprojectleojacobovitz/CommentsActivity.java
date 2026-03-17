@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class CommentsActivity extends AppCompatActivity {
     private ImageButton btnSend;
     private DatabaseReference commentsRef;
     private ValueEventListener commentsListener;
+    private ImageView btn_back_feed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,10 @@ public class CommentsActivity extends AppCompatActivity {
 
         // שליחת תגובה
         btnSend.setOnClickListener(v -> postComment());
+
+        btn_back_feed = findViewById(R.id.btn_back_feed);
+        btn_back_feed.setOnClickListener(v -> finish());
+
     }
 
     private void postComment() {

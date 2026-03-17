@@ -1,5 +1,6 @@
 package com.example.finalprojectleojacobovitz;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,7 +39,8 @@ public class AiActivity extends AppCompatActivity {
                 btnHome.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        finish();
+                       // finish();
+                        startActivity(new Intent(AiActivity.this, MainActivity.class));
                     }
                 });
 
