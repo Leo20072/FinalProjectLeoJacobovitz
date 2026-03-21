@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnlogout,btnaddbook,btnlistbooks,btnAi,btninstructions,btnforum,btnAccount;
+    Button btnlogout,btnaddbook,btnlistbooks,btnAi,btninstructions,btnforum,btnAccount,btnSettings;
     TextView name;
     FirebaseAuth fauth;
     FirebaseFirestore fstore;
@@ -102,6 +102,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnSettings = findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent);
             }
         });
