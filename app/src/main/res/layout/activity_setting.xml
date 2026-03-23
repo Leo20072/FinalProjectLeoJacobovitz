@@ -6,114 +6,188 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="top"
-    android:paddingTop="32dp"
     android:background="@color/lavender"
-    tools:context=".MainActivity">
+    tools:context=".SettingActivity">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="20dp"
+        android:paddingHorizontal="16dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="@color/white" />
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:text="הגדרות"
         android:textColor="@color/white"
         android:textSize="36sp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_marginBottom="30dp"
-        />
+        android:textStyle="bold" />
 
+    </RelativeLayout>
 
-    <androidx.cardview.widget.CardView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="30dp"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="20dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
-            android:padding="24dp"
-            android:background="@drawable/custom_edittext">
+            android:gravity="top">
 
-            <TextView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ניהול התראות"
-                android:textSize="28sp"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:textColor="@color/Cyan_green"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="20dp"
+                android:layout_marginTop="10dp">
 
-            <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="24dp"
+                    android:background="@drawable/custom_edittext">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="עריכת פרופיל"
+                        android:textSize="28sp"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/Cyan_green"
+                        android:layout_marginBottom="10dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="עדכן את פרטיך האישיים ואת סיסמתך"
+                        android:textSize="14sp"
+                        android:textColor="@color/Cyan_green"
+                        android:gravity="center"
+                        android:layout_marginBottom="20dp"/>
+
+                    <Button
+                        android:id="@+id/btnEditProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="היכנס לעריכת פרופיל"
+                        android:textSize="18sp"
+                        android:backgroundTint="@color/Cyan_green"
+                        app:cornerRadius="20dp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="תזכורות קריאה"
-                android:textSize="14sp"
-                android:textColor="@color/Cyan_green"
-                android:gravity="center"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="30dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="24dp"
+                    android:background="@drawable/custom_edittext">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ניהול התראות"
+                        android:textSize="28sp"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/Cyan_green"
+                        android:layout_marginBottom="10dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="תזכורות קריאה"
+                        android:textSize="14sp"
+                        android:textColor="@color/Cyan_green"
+                        android:gravity="center"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="נהל את זמני הקריאה היומיים שלך"
+                        android:textSize="14sp"
+                        android:textColor="@color/Cyan_green"
+                        android:gravity="center"
+                        android:layout_marginBottom="15dp"/>
+
+                    <Button
+                        android:id="@+id/btnSetDaily"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="הפעל תזכורת (10:00)"
+                        android:textSize="18sp"
+                        android:backgroundTint="@color/Cyan_green"
+                        app:cornerRadius="20dp"/>
+
+                    <Button
+                        android:id="@+id/btnTestNow"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:text="בדוק התראה (בעוד 5 שניות)"
+                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/lavender"
+                        app:strokeColor="@color/lavender"
+                        app:strokeWidth="2dp"
+                        app:cornerRadius="20dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                    <Button
+                        android:id="@+id/btnCancelAlarm"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:text="בטל תזכורת יומית"
+                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="#E53935"
+                        app:strokeColor="#E53935"
+                        app:strokeWidth="2dp"
+                        app:cornerRadius="20dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="נהל את זמני הקריאה היומיים שלך"
-                android:textSize="14sp"
-                android:textColor="@color/Cyan_green"
-                android:gravity="center"
-                android:layout_marginBottom="15dp"/>
-
-            <Button
-                android:id="@+id/btnSetDaily"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="הפעל תזכורת (10:00)"
-                android:textSize="18sp"
-                android:backgroundTint="@color/Cyan_green"
-                app:cornerRadius="20dp"/>
-
-            <Button
-                android:id="@+id/btnTestNow"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:text="בדוק התראה (בעוד 5 שניות)"
-                android:textSize="16sp"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/lavender"
-                app:strokeColor="@color/lavender"
-                app:strokeWidth="2dp"
-                app:cornerRadius="20dp"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-            <Button
-                android:id="@+id/btnCancelAlarm"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:text="בטל תזכורת יומית"
-                android:textSize="16sp"
-                android:layout_marginTop="20dp"
-                android:textColor="#E53935"
-                app:strokeColor="#E53935"
-                app:strokeWidth="2dp"
-                app:cornerRadius="20dp"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-            <TextView
+                android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_back"
                 android:text="חזור למסך הראשי"
                 android:layout_gravity="center"
-                android:padding="8dp"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/lavender"
-                android:textSize="16sp"/>
+                android:padding="16dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </ScrollView>
 </LinearLayout>

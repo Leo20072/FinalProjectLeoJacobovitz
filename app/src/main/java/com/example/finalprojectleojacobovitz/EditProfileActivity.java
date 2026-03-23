@@ -6,6 +6,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -29,6 +30,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private EditText editFullName, editEmail;
     private Button btnSave;
+    TextView cancel;
 
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
@@ -38,6 +40,14 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        cancel=findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         // אתחול Firebase
         db = FirebaseFirestore.getInstance();

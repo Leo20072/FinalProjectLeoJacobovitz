@@ -113,9 +113,9 @@ public class CommentsActivity extends AppCompatActivity {
                     .addOnSuccessListener(aVoid -> {
                         etInput.setText("");
 
-                        // גלילה למטה לתגובה החדשה
+                        // גלילה למעלה (למיקום 0) לאחר שליחת התגובה החדשה
                         if (adapter.getItemCount() > 0) {
-                            recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
+                            recyclerView.smoothScrollToPosition(0); //
                         }
                     })
                     .addOnFailureListener(e -> {
@@ -135,12 +135,15 @@ public class CommentsActivity extends AppCompatActivity {
                 List<Comment> list = new ArrayList<>();
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     Comment c = snap.getValue(Comment.class);
-                    if (c != null) list.add(c);
+                    if (c != null) {
+                        //  הוספת התגובה לאינדקס 0 (תחילת הרשימה) במקום לסופה
+                        list.add(0, c);
+                    }
                 }
                 adapter.setComments(list);
-                // גלילה למטה כשפותחים את המסך
+                // גלילה למעלה (למיקום 0) כשהמסך נטען
                 if (list.size() > 0) {
-                    recyclerView.scrollToPosition(list.size() - 1);
+                    recyclerView.scrollToPosition(0);
                 }
             }
 

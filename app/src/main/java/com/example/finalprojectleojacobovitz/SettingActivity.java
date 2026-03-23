@@ -11,8 +11,10 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,12 +40,26 @@ public class SettingActivity extends AppCompatActivity {
     private static final int DAILY_ALARM_REQUEST_CODE = 0;
     private static final int TEST_ALARM_REQUEST_CODE = 1;
     private TextView btn_back;
+    Button btnEditProfile;
+    ImageView btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_setting);
+
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
+
+        btnEditProfile = findViewById(R.id.btnEditProfile);
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(v -> finish());
@@ -151,15 +167,21 @@ public class SettingActivity extends AppCompatActivity {
         long triggerTime = System.currentTimeMillis() + 5000;
 
         if (alarmManager != null) {
-            // התיקון: בדיקה האם המערכת מרשה לנו לתזמן התראה מדויקת
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // התיקון: בדיקה והפניה למסך ההגדרות הנכון
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { // אנדרואיד 12 ומעלה
                 if (!alarmManager.canScheduleExactAlarms()) {
-                    Toast.makeText(this, "יש לאשר הרשאת תזמון מדויק בהגדרות", Toast.LENGTH_LONG).show();
-                    return; // עוצר את הפעולה אם אין הרשאה
+                    Toast.makeText(this, "מעביר אותך להגדרות לאישור תזמון מדויק...", Toast.LENGTH_LONG).show();
+
+                    // פותח בדיוק את המסך שבו מאשרים את ההרשאה הזו לאפליקציה שלך
+                    Intent settingsIntent = new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                    settingsIntent.setData(android.net.Uri.parse("package:" + getPackageName()));
+                    startActivity(settingsIntent);
+
+                    return; // עוצר את הפעולה עד שהמשתמש יאשר ויחזור
                 }
             }
 
-            // אם יש הרשאה (או שזה אנדרואיד ישן יותר), ממשיכים כרגיל
+            // אם יש הרשאה, ממשיכים כרגיל
             alarmManager.setExact(
                     AlarmManager.RTC_WAKEUP,
                     triggerTime,
