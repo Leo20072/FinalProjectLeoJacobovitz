@@ -161,7 +161,7 @@ public class ListOfBooks extends AppCompatActivity {
             startActivityForResult(intent, PICK_IMAGE_REQUEST);
         });
 
-        // === מילוי הנתונים מהדאטה-בייס אל תוך המסך ===
+        //  מילוי הנתונים מfirebase אל תוך המסך
         etTitle.setText(bookToEdit.getNameOfBook());
         etAuthor.setText(bookToEdit.getAuthorsname());
 
@@ -211,7 +211,7 @@ public class ListOfBooks extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        // פעולת השמירה - מתבצעת רק לאחר בדיקת תקינות
+        // פעולת השמירה, מתבצעת רק לאחר בדיקת תקינות
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
             String newTitle = etTitle.getText().toString().trim();
             String newAuthor = etAuthor.getText().toString().trim();
@@ -326,7 +326,6 @@ public class ListOfBooks extends AppCompatActivity {
 
     public static String encodeImage(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        // דחיסה עם איכות, ניתן לשנות את האיכות כאן אם התמונה גדולה מדי
         bitmap.compress(Bitmap.CompressFormat.JPEG, 75, outputStream);
         byte[] imageBytes = outputStream.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);

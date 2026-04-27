@@ -24,7 +24,6 @@
             android:orientation="vertical"
             android:padding="1dp">
 
-            <!-- Title of the screen -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,9 +34,7 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp"/>
 
-            <!-- Book Cover Image Upload Placeholder -->
 
-            <!-- 1. Book Name Input -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,7 +73,6 @@
                 android:textColor="@color/lavender"
                 android:textDirection="rtl"/>
 
-            <!-- 2. Author's Name Input -->
             <EditText
                 android:id="@+id/authorsname"
                 android:layout_width="match_parent"
@@ -89,7 +85,6 @@
                 android:textColor="@color/lavender"
                 android:textDirection="rtl"/>
 
-            <!-- 3. Pages Count Input (Corrected ID and input type) -->
             <EditText
                 android:id="@+id/uploadPagesCount"
                 android:layout_width="match_parent"
@@ -113,7 +108,6 @@
                 android:textStyle="bold"
                 android:textSize="16sp" />
 
-            <!-- 4. Category Selector (Updated to Spinner) -->
             <Spinner
                 android:id="@+id/uploadCategory"
                 android:layout_width="match_parent"
@@ -123,9 +117,7 @@
                 android:padding="16dp"
                 android:spinnerMode="dropdown"
                 />
-            <!-- הערה: יש להגדיר את רשימת הקטגוריות (book_categories_placeholder) בתוך קובץ res/values/arrays.xml. יש לוודא שהצבעים תואמים את lavander. -->
 
-            <!-- 5. Start Reading Date Input (NEW FIELD - set to date input type) -->
             <EditText
                 android:id="@+id/uploadStartDate"
                 android:layout_width="match_parent"
@@ -139,7 +131,6 @@
                 android:textColor="@color/lavender"
                 android:textDirection="rtl"/>
 
-            <!-- Save Button -->
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="match_parent"
