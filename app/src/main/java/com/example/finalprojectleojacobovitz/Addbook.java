@@ -47,7 +47,6 @@ public class Addbook extends AppCompatActivity implements AdapterView.OnItemSele
     };
 
     private String choosecategory;
-    EditText uploadImageUrl;
     Button saveButton;
     EditText nameofbook, authorsname, uploadPagesCount, uploadStartDate;
     String pagesread = String.valueOf(0);
