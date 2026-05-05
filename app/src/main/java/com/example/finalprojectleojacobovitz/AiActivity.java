@@ -31,18 +31,21 @@ public class AiActivity extends AppCompatActivity {
         etQuestion = findViewById(R.id.etQuestion);
         tvAnswer = findViewById(R.id.tvAnswer);
         btnAsk = findViewById(R.id.btnAsk);
+
+
+        btnHome = findViewById(R.id.btnHome);
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AiActivity.this, MainActivity.class));
+            }
+        });
+
+
+
         btnAsk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                btnHome = findViewById(R.id.btnHome);
-                btnHome.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                       // finish();
-                        startActivity(new Intent(AiActivity.this, MainActivity.class));
-                    }
-                });
 
                 String q = etQuestion.getText().toString();
                 if(q.equals(""))
