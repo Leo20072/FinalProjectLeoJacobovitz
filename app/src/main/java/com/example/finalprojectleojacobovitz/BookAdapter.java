@@ -109,11 +109,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
             String percentageDisplay = String.format(Locale.US, "%.0f%%", percentage);
 
-            // הצגת הטקסט וטיפול במעבר למסך הדירוג
             if (pagesRead >= totalPages) {
                 holder.percentageText.setText("הושלם! 100% 🎉 (לחץ כאן לדירוג)");
 
-                // הוספנו מאזין לחיצה במקום הפעלה אוטומטית!
+
                 holder.percentageText.setOnClickListener(v -> {
                     if (!currentBook.isHasPost()) {
                         Intent intent = new Intent(context, RateAndPostActivity.class);
@@ -128,7 +127,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 });
             } else {
                 holder.percentageText.setText(pagesRead + " מתוך " + totalPages + " (" + percentageDisplay + ")");
-                holder.percentageText.setOnClickListener(null); // איפוס מאזין הלחיצה לספרים שלא הושלמו
+                holder.percentageText.setOnClickListener(null);
             }
 
         } catch (NumberFormatException e) {
