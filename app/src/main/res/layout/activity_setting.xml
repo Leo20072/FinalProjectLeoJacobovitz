@@ -177,16 +177,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="חזור למסך הראשי"
-                android:layout_gravity="center"
-                android:padding="16dp"
-                android:layout_marginBottom="20dp"
-                android:textColor="@color/white"
-                android:textSize="18sp"/>
 
         </LinearLayout>
     </LinearLayout>

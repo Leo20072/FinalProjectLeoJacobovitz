@@ -39,7 +39,6 @@ public class SettingActivity extends AppCompatActivity {
 
     private static final int DAILY_ALARM_REQUEST_CODE = 0;
     private static final int TEST_ALARM_REQUEST_CODE = 1;
-    private TextView btn_back;
     Button btnEditProfile;
     ImageView btnBack;
 
@@ -49,8 +48,7 @@ public class SettingActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_setting);
 
-        btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> finish());
+
 
         btnEditProfile = findViewById(R.id.btnEditProfile);
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
@@ -60,9 +58,8 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        btn_back = findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(v -> finish());
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
         createNotificationChannel();
 
         Button btnSetDaily = findViewById(R.id.btnSetDaily);
