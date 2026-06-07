@@ -64,7 +64,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             progressBar = itemView.findViewById(R.id.horizontal_progress_bar);
             percentageText = itemView.findViewById(R.id.progress_percentage_text);
 
-            btnView = itemView.findViewById(R.id.btn_view);
             btnEdit = itemView.findViewById(R.id.btn_edit);
             btnDelete = itemView.findViewById(R.id.btn_delete);
 
